@@ -7,7 +7,7 @@ import javafx.concurrent.Task;
 import java.io.IOException;
 
 /**
- * @author 61711
+ * @author cppno1
  */
 public class UniqueTaskService extends Service<String> {
 

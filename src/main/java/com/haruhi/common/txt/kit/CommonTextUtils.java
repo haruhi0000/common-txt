@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 
 /**
- * @author 61711
+ * @author cppno1
  */
 public class CommonTextUtils {
 

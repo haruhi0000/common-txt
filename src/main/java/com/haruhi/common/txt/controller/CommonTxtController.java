@@ -1,10 +1,14 @@
 package com.haruhi.common.txt.controller;
 
 import com.haruhi.common.txt.CommonTxtApplication;
-import com.haruhi.common.txt.concurrent.task.Context;
+import com.haruhi.common.txt.app.Context;
+import com.haruhi.common.txt.app.StandardCharset;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -15,11 +19,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * @author 61711
+ * @author cppno1
  */
 public class CommonTxtController implements Initializable {
     @FXML
     public Button uniqueButton;
+    @FXML
+    ChoiceBox<String> charsetChoice;
     @FXML
     Label targetFilePathLabel;
     @FXML
@@ -92,5 +98,7 @@ public class CommonTxtController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         uniqueButton.setDisable(true);
+        charsetChoice.setItems(FXCollections.observableArrayList(StandardCharset.ALL_CHARSET));
+
     }
 }

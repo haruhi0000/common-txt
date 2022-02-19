@@ -1,7 +1,7 @@
 package com.haruhi.common.txt.controller;
 
 import com.haruhi.common.txt.CommonTxtApplication;
-import com.haruhi.common.txt.concurrent.task.Context;
+import com.haruhi.common.txt.app.Context;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * @author 61711
+ * @author cppno1
  */
 public class ProcessController implements Initializable {
     @FXML

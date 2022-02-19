@@ -1,12 +1,12 @@
 package com.haruhi.common.txt.kit;
 
-import com.haruhi.common.txt.concurrent.task.Context;
+import com.haruhi.common.txt.app.Context;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 
 /**
- * @author 61711
+ * @author cppno1
  */
 public class FileSplitUtil extends Thread {
 

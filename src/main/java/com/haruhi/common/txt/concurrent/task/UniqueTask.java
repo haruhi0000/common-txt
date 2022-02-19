@@ -1,6 +1,7 @@
 package com.haruhi.common.txt.concurrent.task;
 
 import com.haruhi.common.txt.CommonTxtApplication;
+import com.haruhi.common.txt.app.Context;
 import com.haruhi.common.txt.kit.CommonTextUtils;
 import com.haruhi.common.txt.kit.FileMergeUtil;
 import com.haruhi.common.txt.kit.FileSplitUtil;
@@ -13,7 +14,7 @@ import java.io.IOException;
 
 
 /**
- * @author 61711
+ * @author cppno1
  */
 public class UniqueTask extends Task<String> {
 

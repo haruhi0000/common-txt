@@ -3,7 +3,7 @@ package com.haruhi.common.txt.model;
 import java.io.File;
 
 /**
- * @author 61711
+ * @author cppno1
  */
 public class TaskInfo {
     private File sourceFile;
