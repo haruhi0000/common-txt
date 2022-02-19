@@ -1,0 +1,18 @@
+.input {
+    -fx-border-style: solid;
+    -fx-border-width: 0.5px;
+    -fx-height: 20px;
+    -fx-max-height: 20px;
+}
+
+.box {
+    -fx-border-style: solid;
+    -fx-border-width: 0.5px;
+    -fx-margin: 10px;
+    -fx-padding: 20px;
+}
+
+.dev-border {
+    -fx-border-style: solid;
+    -fx-border-width: 0px;
+}

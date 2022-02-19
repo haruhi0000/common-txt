@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane prefHeight="260.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.haruhi.common.txt.controller.CommonTxtController">
+   <children>
+       <TabPane prefHeight="260.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE">
+           <Tab text="一般">
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="227.0" prefWidth="450.0">
+                   <Label layoutX="9.0" layoutY="15.0" prefHeight="20.0" prefWidth="60.0" text="源文件" />
+                   <Label fx:id="sourceFilePathLabel" layoutX="10.0" layoutY="42.0" prefHeight="20.0" prefWidth="380.0" styleClass="input">
+                       <opaqueInsets>
+                           <Insets />
+                       </opaqueInsets>
+                   </Label>
+                   <Button layoutX="349.0" layoutY="73.0" mnemonicParsing="false" onAction="#onSelectTempDirectoryButtonClick" prefHeight="20.0" styleClass="btn-primary" text="浏览" />
+                   <Button layoutX="351.0" layoutY="14.0" mnemonicParsing="false" onAction="#onOpenFileButtonClick" prefHeight="20.0" styleClass="btn-primary" text="打开" />
+                   <Label layoutX="10.0" layoutY="75.0" prefHeight="20.0" prefWidth="71.0" text="临时文件夹" />
+                   <Label fx:id="tempDirectoryLabel" layoutX="10.0" layoutY="101.0" prefHeight="20.0" prefWidth="380.0" styleClass="input" />
+                   <Button fx:id="uniqueButton" layoutX="10.0" layoutY="192.0" mnemonicParsing="false" onAction="#onStartButton2Click" prefHeight="23.0" prefWidth="166.0" styleClass="btn-primary" text="去重" />
+                   <Label layoutX="9.0" layoutY="130.0" prefHeight="20.0" text="输出文件" />
+                   <Label fx:id="targetFilePathLabel" layoutX="10.0" layoutY="157.0" prefHeight="20.0" prefWidth="379.0" styleClass="input" />
+                   <Button layoutX="349.0" layoutY="129.0" mnemonicParsing="false" onAction="#onTargetFileSelectClick" prefHeight="20.0" text="选择" />
+               </AnchorPane>
+           </Tab>
+           <Tab text="关于">
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+           </Tab>
+       </TabPane>
+   </children>
+</Pane>
