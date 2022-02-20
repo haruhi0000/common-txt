@@ -1,4 +1,4 @@
-package com.haruhi.common.txt.concurrent.task;
+package com.haruhi.common.txt.app;
 
 import com.haruhi.common.txt.model.TaskInfo;
 import com.haruhi.common.txt.model.TaskProgress;
@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- * @author 61711
+ * @author cppno1
  */
 public class Context {
     public static final TaskInfo taskInfo = new TaskInfo();
@@ -23,4 +23,5 @@ public class Context {
     public static int step = 0;
     public static String[] progressText = {"初始化", "分割文件: %s %%","合并文件: %s %%"};
     public static SimpleStringProperty infoLabelProperty = new SimpleStringProperty();
+
 }

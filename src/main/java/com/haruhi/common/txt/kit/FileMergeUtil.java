@@ -1,13 +1,13 @@
 package com.haruhi.common.txt.kit;
 
-import com.haruhi.common.txt.concurrent.task.Context;
+import com.haruhi.common.txt.app.Context;
 
 import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author 61711
+ * @author cppno1
  */
 public class FileMergeUtil extends Thread {
 
@@ -31,13 +31,13 @@ public class FileMergeUtil extends Thread {
     public void mergeFile() throws IOException {
 
         // 结果文件输出流
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Context.taskInfo.getTargetFile())));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(Context.taskInfo.getTargetFile(), Context.taskInfo.getCharset()));
         long finished = 0;
         int treeSerInitialCapacity;
         treeSerInitialCapacity = (Context.taskInfo.getLineCount() / tempDir.length) * 2;
         Set<String> hashSet = new HashSet<>(treeSerInitialCapacity);
         for (File file : tempDir) {
-            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
+            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file, Context.taskInfo.getCharset()))) {
                 String line;
                 while ((line = bufferedReader.readLine()) != null) {
                     checkWaitSign();

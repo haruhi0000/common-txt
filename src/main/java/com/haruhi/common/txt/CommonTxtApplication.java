@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * @author 61711
+ * @author cppno1
  */
 public class CommonTxtApplication extends Application {
 
@@ -18,7 +18,7 @@ public class CommonTxtApplication extends Application {
 	public static Scene mainScene;
 	public static Scene processScene;
 	public static int windowWidth = 400;
-	public static int windowHeight = 260;
+	public static int windowHeight = 330;
 	public static final UniqueTaskService uniqueTaskService = new UniqueTaskService();
 	static System.Logger logger;
 	public CommonTxtApplication() {

@@ -1,12 +1,13 @@
 package com.haruhi.common.txt.kit;
 
-import com.haruhi.common.txt.concurrent.task.Context;
+import com.haruhi.common.txt.app.Context;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 /**
- * @author 61711
+ * @author cppno1
  */
 public class FileSplitUtil extends Thread {
 
@@ -34,7 +35,7 @@ public class FileSplitUtil extends Thread {
         bufferedWriters = new BufferedWriter[(int) tempFileCount];
         for (int i = 0; i < tempFileCount; i++) {
             File newFile = new File(Context.taskInfo.getTempDirectory() + File.separator + i + ".txt");
-            bufferedWriters[i] = new BufferedWriter(new FileWriter(newFile));
+            bufferedWriters[i] = new BufferedWriter(new FileWriter(newFile, Context.taskInfo.getCharset()));
             newFile.deleteOnExit();
         }
     }
@@ -54,7 +55,7 @@ public class FileSplitUtil extends Thread {
      */
     public void splitFile() throws IOException {
         // 读源文件
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(Context.taskInfo.getSourceFile()));
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(Context.taskInfo.getSourceFile(), Context.taskInfo.getCharset()));
         String line;
         while ((line = bufferedReader.readLine()) != null) {
             checkWaitSign();

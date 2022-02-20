@@ -1,7 +1,7 @@
 package com.haruhi.common.txt.model;
 
 /**
- * @author 61711
+ * @author cppno1
  */
 public class TaskProgress {
     private Long    totalSize;
