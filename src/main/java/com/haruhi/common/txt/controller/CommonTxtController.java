@@ -51,7 +51,7 @@ public class CommonTxtController implements Initializable {
     protected void onOpenFileButtonClick() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
-        fileChooser.setInitialDirectory(new File("C:\\Users\\61711\\Documents\\test"));
+
         File file = fileChooser.showOpenDialog(CommonTxtApplication.mainStage);
         if (file != null) {
             sourceFilePathLabel.setText(file.getAbsolutePath());
