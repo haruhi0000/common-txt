@@ -4,7 +4,6 @@ import com.haruhi.common.txt.app.Context;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 
 /**
  * @author cppno1
@@ -16,7 +15,7 @@ public class FileSplitUtil extends Thread {
     /**
      * 临时文件数量
      */
-    private long tempFileCount;
+    private int tempFileCount;
 
     private long finishSize = 0L;
 
@@ -27,7 +26,7 @@ public class FileSplitUtil extends Thread {
         // 删除临时文件
         FileUtils.cleanDirectory(Context.taskInfo.getTempDirectory());
 
-        tempFileCount = Context.taskInfo.getSourceFile().length() / (50 * 1024 * 1024);
+        tempFileCount = (int) (Context.taskInfo.getSourceFile().length() / (50 * 1024 * 1024));
         if (tempFileCount < 1) {
             tempFileCount = 1;
         }
@@ -57,17 +56,22 @@ public class FileSplitUtil extends Thread {
         // 读源文件
         BufferedReader bufferedReader = new BufferedReader(new FileReader(Context.taskInfo.getSourceFile(), Context.taskInfo.getCharset()));
         String line;
+        int[] lineNumbers = new int[tempFileCount];
+
         while ((line = bufferedReader.readLine()) != null) {
             checkWaitSign();
             // 哈希分组运算，把字符串写到指定的文件
-            BufferedWriter bufferedWriter = bufferedWriters[(int) Math.abs(line.hashCode() % tempFileCount)];
+            int index = Math.abs(line.hashCode() % tempFileCount);
+            BufferedWriter bufferedWriter = bufferedWriters[index];
             bufferedWriter.write(line);
             bufferedWriter.newLine();
+            lineNumbers[index] = lineNumbers[index] + 1;
             finishSize = finishSize + 1;
             Context.splitTaskProgress.setFinishedSize(finishSize);
         }
-        for (BufferedWriter writer : bufferedWriters) {
-            writer.close();
+        for (int i = 0; i < tempFileCount; i++) {
+            bufferedWriters[i].close();
+            Context.MAX_LINE_COUNT = Math.max(Context.MAX_LINE_COUNT, lineNumbers[i]);
         }
 
         Context.splitTaskProgress.setFinished(true);

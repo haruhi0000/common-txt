@@ -11,7 +11,7 @@ public class TaskInfo {
     private File targetFile;
     private File tempDirectory;
     private File outDirectory;
-    private Integer lineCount;
+    private Long lineCount;
     private Charset charset;
 
     public Charset getCharset() {
@@ -22,11 +22,11 @@ public class TaskInfo {
         this.charset = charset;
     }
 
-    public Integer getLineCount() {
+    public Long getLineCount() {
         return lineCount;
     }
 
-    public void setLineCount(Integer lineCount) {
+    public void setLineCount(Long lineCount) {
         this.lineCount = lineCount;
     }
 

@@ -33,9 +33,8 @@ public class FileMergeUtil extends Thread {
         // 结果文件输出流
         BufferedWriter writer = new BufferedWriter(new FileWriter(Context.taskInfo.getTargetFile(), Context.taskInfo.getCharset()));
         long finished = 0;
-        int treeSerInitialCapacity;
-        treeSerInitialCapacity = (Context.taskInfo.getLineCount() / tempDir.length) * 2;
-        Set<String> hashSet = new HashSet<>(treeSerInitialCapacity);
+
+        Set<String> hashSet = new HashSet<>(Context.MAX_LINE_COUNT, 1);
         for (File file : tempDir) {
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file, Context.taskInfo.getCharset()))) {
                 String line;

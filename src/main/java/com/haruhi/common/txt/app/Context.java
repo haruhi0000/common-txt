@@ -23,5 +23,5 @@ public class Context {
     public static int step = 0;
     public static String[] progressText = {"初始化", "分割文件: %s %%","合并文件: %s %%"};
     public static SimpleStringProperty infoLabelProperty = new SimpleStringProperty();
-
+    public static int MAX_LINE_COUNT = 0;
 }

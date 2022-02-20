@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -28,12 +29,18 @@
                    <Label layoutX="9.0" layoutY="130.0" prefHeight="20.0" text="输出文件" />
                    <Label fx:id="targetFilePathLabel" layoutX="10.0" layoutY="157.0" prefHeight="20.0" prefWidth="380.0" styleClass="input" />
                    <Button layoutX="349.0" layoutY="129.0" mnemonicParsing="false" onAction="#onTargetFileSelectClick" prefHeight="20.0" text="选择" />
-               <ChoiceBox fx:id="charsetChoice" layoutX="10.0" layoutY="214.0"  prefHeight="23.0" prefWidth="380.0" />
+               <ChoiceBox fx:id="charsetChoice" layoutX="10.0" layoutY="214.0" prefHeight="23.0" prefWidth="380.0" />
                <Label layoutX="10.0" layoutY="190.0" prefHeight="20.0" text="字符集" />
                </AnchorPane>
            </Tab>
            <Tab text="关于">
-               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="380.0" text="下载最新版本和提供反馈" wrapText="true" />
+                  <Hyperlink layoutX="10.0" layoutY="30.0" onMouseClicked="#onAboutLinkClick" text="https://github.com/cqqno1/common-txt" />
+                  <Label layoutX="10.0" layoutY="60.0" text="版本" />
+                  <Label layoutX="10.0" layoutY="80.0" text="1.1.1" />
+               </children></AnchorPane>
            </Tab>
        </TabPane>
    </children>

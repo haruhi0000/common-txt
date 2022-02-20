@@ -10,11 +10,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import org.apache.commons.lang3.StringUtils;
 
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ResourceBundle;
@@ -103,6 +108,7 @@ public class CommonTxtController implements Initializable {
         checkInputValue();
     }
 
+
     private void checkInputValue() {
         uniqueButton.setDisable(StringUtils.isAnyEmpty(targetFilePathLabel.getText(), sourceFilePathLabel.getText(),
                 tempDirectoryLabel.getText(), charsetChoice.getValue()));
@@ -113,5 +119,13 @@ public class CommonTxtController implements Initializable {
         uniqueButton.setDisable(true);
         charsetChoice.setItems(FXCollections.observableArrayList(StandardCharset.ALL_CHARSET));
         charsetChoice.addEventHandler(EventType.ROOT, (e) -> checkInputValue());
+    }
+
+    public void onAboutLinkClick(MouseEvent mouseEvent) {
+        try {
+            Desktop.getDesktop().browse(new URI("https://github.com/cqqno1/common-txt"));
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 }
