@@ -3,8 +3,8 @@ package com.haruhi.common.txt.controller;
 import com.haruhi.common.txt.CommonTxtApplication;
 import com.haruhi.common.txt.app.Context;
 import com.haruhi.common.txt.app.StandardCharset;
-import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ResourceBundle;
 
 /**
@@ -37,6 +38,9 @@ public class CommonTxtController implements Initializable {
         Context.taskInfo.setTargetFile(new File(targetFilePathLabel.getText()));
         Context.taskInfo.setSourceFile(new File(sourceFilePathLabel.getText()));
         Context.taskInfo.setTempDirectory(new File(tempDirectoryLabel.getText()));
+        String charsetChoiceValue = charsetChoice.getValue();
+        String[] strings = charsetChoiceValue.split(" ");
+        Context.taskInfo.setCharset(Charset.forName(strings[strings.length - 1]));
     }
 
 
@@ -53,8 +57,8 @@ public class CommonTxtController implements Initializable {
             sourceFilePathLabel.setText(file.getAbsolutePath());
             tempDirectoryLabel.setText(file.getParent() + File.separator + "temp");
             targetFilePathLabel.setText(file.getParent() + File.separator + file.getName() + ".unique.txt");
-            uniqueButton.setDisable(false);
         }
+        checkInputValue();
     }
 
 
@@ -66,7 +70,10 @@ public class CommonTxtController implements Initializable {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("选择临时文件夹");
         File tempDirectory = directoryChooser.showDialog(CommonTxtApplication.mainStage);
-        tempDirectoryLabel.setText(tempDirectory.getAbsolutePath());
+        if (tempDirectory != null) {
+            tempDirectoryLabel.setText(tempDirectory.getAbsolutePath());
+        }
+        checkInputValue();
     }
 
 
@@ -92,13 +99,18 @@ public class CommonTxtController implements Initializable {
         if (file != null) {
             targetFilePathLabel.setText(file.getAbsolutePath());
         }
+        checkInputValue();
     }
 
+    private void checkInputValue() {
+        uniqueButton.setDisable(StringUtils.isAnyEmpty(targetFilePathLabel.getText(), sourceFilePathLabel.getText(),
+                tempDirectoryLabel.getText(), charsetChoice.getValue()));
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         uniqueButton.setDisable(true);
         charsetChoice.setItems(FXCollections.observableArrayList(StandardCharset.ALL_CHARSET));
-
+        charsetChoice.addEventHandler(EventType.ROOT, (e) -> checkInputValue());
     }
 }

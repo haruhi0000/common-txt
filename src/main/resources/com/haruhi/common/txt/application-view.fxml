@@ -28,7 +28,7 @@
                    <Label layoutX="9.0" layoutY="130.0" prefHeight="20.0" text="输出文件" />
                    <Label fx:id="targetFilePathLabel" layoutX="10.0" layoutY="157.0" prefHeight="20.0" prefWidth="380.0" styleClass="input" />
                    <Button layoutX="349.0" layoutY="129.0" mnemonicParsing="false" onAction="#onTargetFileSelectClick" prefHeight="20.0" text="选择" />
-               <ChoiceBox fx:id="charsetChoice" layoutX="10.0" layoutY="214.0" prefHeight="23.0" prefWidth="380.0" />
+               <ChoiceBox fx:id="charsetChoice" layoutX="10.0" layoutY="214.0"  prefHeight="23.0" prefWidth="380.0" />
                <Label layoutX="10.0" layoutY="190.0" prefHeight="20.0" text="字符集" />
                </AnchorPane>
            </Tab>

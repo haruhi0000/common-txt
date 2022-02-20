@@ -1,6 +1,7 @@
 package com.haruhi.common.txt.model;
 
 import java.io.File;
+import java.nio.charset.Charset;
 
 /**
  * @author cppno1
@@ -11,6 +12,15 @@ public class TaskInfo {
     private File tempDirectory;
     private File outDirectory;
     private Integer lineCount;
+    private Charset charset;
+
+    public Charset getCharset() {
+        return charset;
+    }
+
+    public void setCharset(Charset charset) {
+        this.charset = charset;
+    }
 
     public Integer getLineCount() {
         return lineCount;

@@ -1,6 +1,8 @@
 package com.haruhi.common.txt.kit;
 
 
+import com.haruhi.common.txt.app.Context;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,7 +14,7 @@ import java.io.LineNumberReader;
 public class CommonTextUtils {
 
     public static Integer getLineCount(File sourceFile) throws IOException {
-        FileReader in = new FileReader(sourceFile);
+        FileReader in = new FileReader(sourceFile, Context.taskInfo.getCharset());
         LineNumberReader reader = new LineNumberReader(in);
         long skipNumber = reader.skip(Long.MAX_VALUE);
         System.out.println("skipNumber: " + skipNumber);
