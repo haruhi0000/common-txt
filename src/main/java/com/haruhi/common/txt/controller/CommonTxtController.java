@@ -92,8 +92,9 @@ public class CommonTxtController implements Initializable {
         fileChooser.setTitle("Open Resource File");
 
         if (!StringUtils.isEmpty(targetFilePathLabel.getText())) {
-            fileChooser.setInitialDirectory(Context.taskInfo.getSourceFile().getParentFile());
-            fileChooser.setInitialFileName(Context.taskInfo.getSourceFile().getName() + ".unique.txt");
+            File targetFile = new File(targetFilePathLabel.getText());
+            fileChooser.setInitialDirectory(targetFile.getParentFile());
+            fileChooser.setInitialFileName(targetFile.getName());
         }
         File file = fileChooser.showSaveDialog(CommonTxtApplication.mainStage);
         if (file != null) {
