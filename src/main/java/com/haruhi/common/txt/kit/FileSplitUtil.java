@@ -4,13 +4,14 @@ import com.haruhi.common.txt.app.Context;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
+import java.util.Arrays;
 
 /**
  * @author cppno1
  */
 public class FileSplitUtil extends Thread {
 
-    private final BufferedWriter[] bufferedWriters;
+    private final BufferedOutputStream[] bufferedWriters;
 
     /**
      * 临时文件数量
@@ -31,11 +32,11 @@ public class FileSplitUtil extends Thread {
             tempFileCount = 1;
         }
         // 新建文件输出流
-        bufferedWriters = new BufferedWriter[(int) tempFileCount];
+        bufferedWriters = new BufferedOutputStream[(int) tempFileCount];
         for (int i = 0; i < tempFileCount; i++) {
             File newFile = new File(Context.taskInfo.getTempDirectory() + File.separator + i + ".txt");
-            bufferedWriters[i] = new BufferedWriter(new FileWriter(newFile, Context.taskInfo.getCharset()));
-            newFile.deleteOnExit();
+            bufferedWriters[i] = new BufferedOutputStream(new FileOutputStream(newFile));
+            //newFile.deleteOnExit();
         }
     }
 
@@ -54,24 +55,76 @@ public class FileSplitUtil extends Thread {
      */
     public void splitFile() throws IOException {
         // 读源文件
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(Context.taskInfo.getSourceFile(), Context.taskInfo.getCharset()));
-        String line;
-        int[] lineNumbers = new int[tempFileCount];
-
-        while ((line = bufferedReader.readLine()) != null) {
+        BufferedInputStream bufferedReader = new BufferedInputStream(new FileInputStream(Context.taskInfo.getSourceFile()));
+        byte[] buffer;
+        if(Context.taskInfo.getSourceFile().length() < 1024) {
+            buffer = new byte[(int) Context.taskInfo.getSourceFile().length()];
+        } else {
+            buffer = new byte[1024];
+        }
+        buffer = new byte[1];
+        int off = 0;
+        int len = buffer.length;
+        int readLen;
+        int strLen = 0;
+        boolean flag = false;
+        while ((readLen = bufferedReader.read(buffer, off, len)) != -1) {
             checkWaitSign();
-            // 哈希分组运算，把字符串写到指定的文件
-            int index = Math.abs(line.hashCode() % tempFileCount);
-            BufferedWriter bufferedWriter = bufferedWriters[index];
-            bufferedWriter.write(line);
-            bufferedWriter.newLine();
-            lineNumbers[index] = lineNumbers[index] + 1;
-            finishSize = finishSize + 1;
+            int strOff = 0;
+            for (int i = 0; i < readLen; i++) {
+                if (buffer[i] == '\r' || buffer[i] == '\n') {
+                    if(flag) {
+                        strOff = strOff + 1;
+                        finishSize = finishSize + 1;
+                        Context.splitTaskProgress.setFinishedSize(finishSize);
+                        continue;
+                    }
+                    byte[] value = Arrays.copyOfRange(buffer, strOff, strOff + strLen);
+                    int index = Math.abs(Arrays.hashCode(value) % tempFileCount);
+                    BufferedOutputStream bufferedWriter = bufferedWriters[index];
+                    bufferedWriter.write(value);
+                    bufferedWriter.write('\n');
+                    bufferedWriter.flush();
+                    finishSize = finishSize + strLen + 1;
+                    Context.splitTaskProgress.setFinishedSize(finishSize);
+                    strOff = strOff + strLen + 1;
+                    strLen = 0;
+                    flag = true;
+                } else {
+                    flag = false;
+                    strLen = strLen + 1;
+                }
+            }
+            if(strLen == readLen) {
+                byte[] newBuffer = new byte[buffer.length * 2];
+                off = buffer.length;
+                len = buffer.length;
+                System.arraycopy(buffer,0, newBuffer, 0, buffer.length);
+                buffer = newBuffer;
+
+            } else if(strOff != readLen) {
+                if (readLen - strOff >= 0) {
+                    System.arraycopy(buffer, strOff, buffer, 0, readLen - strOff);
+                    off = readLen - strOff;
+                    len = buffer.length - off;
+                }
+            } else {
+                off = 0;
+                len = buffer.length;
+            }
+        }
+        if(!flag) {
+            byte[] value = Arrays.copyOfRange(buffer, 0, off);
+            int index = Math.abs(Arrays.hashCode(value) % tempFileCount);
+            BufferedOutputStream bufferedWriter = bufferedWriters[index];
+            bufferedWriter.write(value);
+            bufferedWriter.write('\n');
+            bufferedWriter.flush();
+            finishSize = finishSize + off;
             Context.splitTaskProgress.setFinishedSize(finishSize);
         }
         for (int i = 0; i < tempFileCount; i++) {
             bufferedWriters[i].close();
-            Context.MAX_LINE_COUNT = Math.max(Context.MAX_LINE_COUNT, lineNumbers[i]);
         }
 
         Context.splitTaskProgress.setFinished(true);

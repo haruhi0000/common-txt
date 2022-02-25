@@ -34,12 +34,12 @@ public class UniqueTask extends Task<String> {
         });
 
 
-        long lineCount = CommonTextUtils.getLineCount(Context.taskInfo.getSourceFile());
+        //long lineCount = CommonTextUtils.getLineCount(Context.taskInfo.getSourceFile());
         Context.totalTaskProgress.setStartTimeStamp(System.currentTimeMillis());
-        Platform.runLater(() -> Context.infoLabelProperty.set(Context.taskInfo.getSourceFile().getAbsolutePath() + "\n" + "总行数: " + lineCount + '\n' + "文件大小: " + Context.taskInfo.getSourceFile().length() + "字节"));
-        Context.taskInfo.setLineCount(lineCount);
-        Context.splitTaskProgress.setTotalSize(Context.taskInfo.getLineCount());
-        Context.mergeTaskProgress.setTotalSize(Context.taskInfo.getLineCount());
+        //Platform.runLater(() -> Context.infoLabelProperty.set(Context.taskInfo.getSourceFile().getAbsolutePath() + "\n" + "总行数: " + lineCount + '\n' + "文件大小: " + Context.taskInfo.getSourceFile().length() + "字节"));
+        //Context.taskInfo.setLineCount(lineCount);
+        Context.splitTaskProgress.setTotalSize(Context.taskInfo.getSourceFile().length());
+        Context.mergeTaskProgress.setTotalSize(Context.taskInfo.getSourceFile().length());
         Context.splitTaskProgress.setStartTimeStamp(System.currentTimeMillis());
         Context.totalTaskProgress.setTotalSize(Context.splitTaskProgress.getTotalSize() + Context.mergeTaskProgress.getTotalSize());
         Context.step = 1;
@@ -48,10 +48,10 @@ public class UniqueTask extends Task<String> {
         updateProgress();
         Context.splitTaskProgress.setFinishedTimeStamp(System.currentTimeMillis());
         Context.step = 2;
-        fileMergeUtil.start();
+        //fileMergeUtil.start();
         taskProgress = Context.mergeTaskProgress;
 
-        updateProgress();
+        //updateProgress();
         Platform.runLater(()->{
             CommonTxtApplication.closeProcessScene();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
