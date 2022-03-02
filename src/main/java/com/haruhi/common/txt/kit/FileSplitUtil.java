@@ -41,7 +41,6 @@ public class FileSplitUtil extends Thread {
         if (tempFileCount < 1) {
             tempFileCount = 1;
         }
-        log.debug(tempFileCount);
         // 新建文件输出流
         BufferedOutputStream[] bufferedWriters = new BufferedOutputStream[(int) tempFileCount];
         for (int i = 0; i < tempFileCount; i++) {
@@ -83,7 +82,7 @@ public class FileSplitUtil extends Thread {
 
         Context.splitTaskProgress.setFinished(true);
     }
-    public static int byteHashCode(byte a[], int off, int len) {
+    public static int byteHashCode(byte[] a, int off, int len) {
         if (a == null)
             return 0;
 
