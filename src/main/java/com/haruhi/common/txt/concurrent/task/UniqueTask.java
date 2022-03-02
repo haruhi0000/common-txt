@@ -51,7 +51,7 @@ public class UniqueTask extends Task<String> {
         updateProgress();
         Context.splitTaskProgress.setFinishedTimeStamp(System.currentTimeMillis());
         log.info("end split timestamp: " + Context.splitTaskProgress.getFinishedTimeStamp());
-        log.info("spend time: " + (Context.splitTaskProgress.getFinishedTimeStamp() - Context.splitTaskProgress.getStartTimeStamp()) / 1000);
+        log.info("spend time: " + (Context.splitTaskProgress.getFinishedTimeStamp() - Context.splitTaskProgress.getStartTimeStamp()) );
         Context.step = 2;
         //fileMergeUtil.start();
         taskProgress = Context.mergeTaskProgress;
@@ -107,7 +107,7 @@ public class UniqueTask extends Task<String> {
                 break;
             }
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
