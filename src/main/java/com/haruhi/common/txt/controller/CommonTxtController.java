@@ -22,6 +22,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
 /**
@@ -44,8 +45,9 @@ public class CommonTxtController implements Initializable {
         Context.taskInfo.setSourceFile(new File(sourceFilePathLabel.getText()));
         Context.taskInfo.setTempDirectory(new File(tempDirectoryLabel.getText()));
         String charsetChoiceValue = charsetChoice.getValue();
-        String[] strings = charsetChoiceValue.split(" ");
-        Context.taskInfo.setCharset(Charset.forName(strings[strings.length - 1]));
+        // String[] strings = charsetChoiceValue.split(" ");
+        // Context.taskInfo.setCharset(Charset.forName(strings[strings.length - 1]));
+        Context.taskInfo.setCharset(StandardCharsets.UTF_8);
     }
 
 
@@ -111,7 +113,7 @@ public class CommonTxtController implements Initializable {
 
     private void checkInputValue() {
         uniqueButton.setDisable(StringUtils.isAnyEmpty(targetFilePathLabel.getText(), sourceFilePathLabel.getText(),
-                tempDirectoryLabel.getText(), charsetChoice.getValue()));
+                tempDirectoryLabel.getText()));
     }
 
     @Override

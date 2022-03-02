@@ -9,6 +9,8 @@ import com.haruhi.common.txt.model.TaskProgress;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.IOException;
 
@@ -21,7 +23,7 @@ public class UniqueTask extends Task<String> {
     final FileSplitUtil fileSplitUtil = new FileSplitUtil();
     final FileMergeUtil fileMergeUtil = new FileMergeUtil();
     TaskProgress taskProgress;
-
+    private Log log = LogFactory.getLog(UniqueTask.class);
     public UniqueTask() throws IOException {
 
     }
@@ -43,10 +45,13 @@ public class UniqueTask extends Task<String> {
         Context.splitTaskProgress.setStartTimeStamp(System.currentTimeMillis());
         Context.totalTaskProgress.setTotalSize(Context.splitTaskProgress.getTotalSize() + Context.mergeTaskProgress.getTotalSize());
         Context.step = 1;
+        log.info("start split timestamp: " + Context.splitTaskProgress.getStartTimeStamp());
         fileSplitUtil.start();
         taskProgress = Context.splitTaskProgress;
         updateProgress();
         Context.splitTaskProgress.setFinishedTimeStamp(System.currentTimeMillis());
+        log.info("end split timestamp: " + Context.splitTaskProgress.getFinishedTimeStamp());
+        log.info("spend time: " + (Context.splitTaskProgress.getFinishedTimeStamp() - Context.splitTaskProgress.getStartTimeStamp()) / 1000);
         Context.step = 2;
         //fileMergeUtil.start();
         taskProgress = Context.mergeTaskProgress;
