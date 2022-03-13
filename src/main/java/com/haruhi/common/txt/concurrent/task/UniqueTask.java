@@ -2,7 +2,6 @@ package com.haruhi.common.txt.concurrent.task;
 
 import com.haruhi.common.txt.CommonTxtApplication;
 import com.haruhi.common.txt.app.Context;
-import com.haruhi.common.txt.kit.CommonTextUtils;
 import com.haruhi.common.txt.kit.FileMergeUtil;
 import com.haruhi.common.txt.kit.FileSplitUtil;
 import com.haruhi.common.txt.model.TaskProgress;
@@ -23,13 +22,13 @@ public class UniqueTask extends Task<String> {
     final FileSplitUtil fileSplitUtil = new FileSplitUtil();
     final FileMergeUtil fileMergeUtil = new FileMergeUtil();
     TaskProgress taskProgress;
-    private Log log = LogFactory.getLog(UniqueTask.class);
+    private final Log log = LogFactory.getLog(UniqueTask.class);
     public UniqueTask() throws IOException {
 
     }
 
     @Override
-    protected String call() throws IOException {
+    protected String call() {
         Platform.runLater(() -> {
             Context.processProperty.set(Context.progressText[Context.step]);
             Context.infoLabelProperty.set(Context.taskInfo.getSourceFile().getAbsolutePath() + "\n" + "总行数: " + "--" + '\n' + "文件大小: " + Context.taskInfo.getSourceFile().length() + "字节");
@@ -53,17 +52,17 @@ public class UniqueTask extends Task<String> {
         log.info("end split timestamp: " + Context.splitTaskProgress.getFinishedTimeStamp());
         log.info("spend time: " + (Context.splitTaskProgress.getFinishedTimeStamp() - Context.splitTaskProgress.getStartTimeStamp()) );
         Context.step = 2;
-        //fileMergeUtil.start();
+        fileMergeUtil.start();
         taskProgress = Context.mergeTaskProgress;
 
-        //updateProgress();
+        updateProgress();
         Platform.runLater(()->{
             CommonTxtApplication.closeProcessScene();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.initOwner(CommonTxtApplication.mainStage);
             alert.setTitle("文本去重工具");
             alert.setHeaderText("文本去重完成");
-            alert.setContentText(String.format("共耗时%d秒", Context.totalTaskProgress.getElapsedTime() / 100));
+            alert.setContentText(String.format("共耗时%d秒", Context.totalTaskProgress.getElapsedTime() / 1000));
             alert.show();
             alert.setOnCloseRequest(( dialogEvent )-> System.exit(0));
         });
@@ -107,7 +106,7 @@ public class UniqueTask extends Task<String> {
                 break;
             }
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

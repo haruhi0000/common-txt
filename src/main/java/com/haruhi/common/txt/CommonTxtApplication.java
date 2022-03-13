@@ -20,13 +20,13 @@ public class CommonTxtApplication extends Application {
 	public static Scene mainScene;
 	public static Scene processScene;
 	public static int windowWidth = 400;
-	public static int windowHeight = 330;
+	public static int windowHeight = 270;
 	public static final UniqueTaskService uniqueTaskService = new UniqueTaskService();
 	static System.Logger logger;
 	public CommonTxtApplication() {
 		logger = System.getLogger("MainApplication");
 	}
-	private Log log = LogFactory.getLog(CommonTxtApplication.class);
+	private final Log log = LogFactory.getLog(CommonTxtApplication.class);
 	@Override
 	public void start(Stage stage)  {
 		log.info("debug model");
