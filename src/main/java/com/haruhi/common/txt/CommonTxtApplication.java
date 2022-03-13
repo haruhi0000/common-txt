@@ -6,6 +6,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.IOException;
 
@@ -18,15 +20,16 @@ public class CommonTxtApplication extends Application {
 	public static Scene mainScene;
 	public static Scene processScene;
 	public static int windowWidth = 400;
-	public static int windowHeight = 330;
+	public static int windowHeight = 270;
 	public static final UniqueTaskService uniqueTaskService = new UniqueTaskService();
 	static System.Logger logger;
 	public CommonTxtApplication() {
 		logger = System.getLogger("MainApplication");
 	}
-
+	private final Log log = LogFactory.getLog(CommonTxtApplication.class);
 	@Override
 	public void start(Stage stage)  {
+		log.info("debug model");
 		CommonTxtApplication.mainStage = stage;
 		initMainScene();
 		stage.setTitle("文本去重工具");

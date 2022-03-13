@@ -2,13 +2,9 @@ package com.haruhi.common.txt.controller;
 
 import com.haruhi.common.txt.CommonTxtApplication;
 import com.haruhi.common.txt.app.Context;
-import com.haruhi.common.txt.app.StandardCharset;
-import javafx.collections.FXCollections;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
@@ -21,7 +17,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
 /**
@@ -30,8 +26,7 @@ import java.util.ResourceBundle;
 public class CommonTxtController implements Initializable {
     @FXML
     public Button uniqueButton;
-    @FXML
-    ChoiceBox<String> charsetChoice;
+
     @FXML
     Label targetFilePathLabel;
     @FXML
@@ -43,9 +38,9 @@ public class CommonTxtController implements Initializable {
         Context.taskInfo.setTargetFile(new File(targetFilePathLabel.getText()));
         Context.taskInfo.setSourceFile(new File(sourceFilePathLabel.getText()));
         Context.taskInfo.setTempDirectory(new File(tempDirectoryLabel.getText()));
-        String charsetChoiceValue = charsetChoice.getValue();
-        String[] strings = charsetChoiceValue.split(" ");
-        Context.taskInfo.setCharset(Charset.forName(strings[strings.length - 1]));
+
+
+        Context.taskInfo.setCharset(StandardCharsets.UTF_8);
     }
 
 
@@ -111,14 +106,12 @@ public class CommonTxtController implements Initializable {
 
     private void checkInputValue() {
         uniqueButton.setDisable(StringUtils.isAnyEmpty(targetFilePathLabel.getText(), sourceFilePathLabel.getText(),
-                tempDirectoryLabel.getText(), charsetChoice.getValue()));
+                tempDirectoryLabel.getText()));
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         uniqueButton.setDisable(true);
-        charsetChoice.setItems(FXCollections.observableArrayList(StandardCharset.ALL_CHARSET));
-        charsetChoice.addEventHandler(EventType.ROOT, (e) -> checkInputValue());
     }
 
     public void onAboutLinkClick(MouseEvent mouseEvent) {
