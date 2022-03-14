@@ -4,6 +4,7 @@ import com.haruhi.common.txt.CommonTxtApplication;
 import com.haruhi.common.txt.app.Context;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -83,6 +84,18 @@ public class CommonTxtController implements Initializable {
     @FXML
     protected void onStartButton2Click() {
         setTaskInfo();
+        if(Context.taskInfo.getTargetFile().getParentFile().getFreeSpace() - Context.taskInfo.getSourceFile().length()
+                + Context.taskInfo.getTempDirectory().getFreeSpace() - Context.taskInfo.getSourceFile().length() < 0) {
+            CommonTxtApplication.closeProcessScene();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(CommonTxtApplication.mainStage);
+            alert.setTitle("文本去重工具");
+            alert.setHeaderText("剩余储存空间不足");
+            alert.show();
+            alert.setOnCloseRequest(( dialogEvent )-> System.exit(0));
+        }
+
+
         CommonTxtApplication.switchProcessScene();
     }
 

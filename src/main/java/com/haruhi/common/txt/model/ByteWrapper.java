@@ -20,6 +20,11 @@ public final class ByteWrapper {
         this.bytes = bytes;
     }
 
+    /**
+     * 这里不检查类型，提高效率
+     * @param o  the reference object with which to compare.
+     * @return true if this object is the same as the obj argument; false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         ByteWrapper that = (ByteWrapper) o;
