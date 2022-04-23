@@ -30,7 +30,7 @@ public class FileSplitUtil extends Thread {
      * 5235
      */
     public void splitFile() throws IOException {
-        int bufferSize = 102400;
+        int bufferSize = 102400 * 2;
         // 创建临时文件夹
         FileUtils.forceMkdir(Context.taskInfo.getTempDirectory());
         // 删除临时文件
@@ -51,7 +51,7 @@ public class FileSplitUtil extends Thread {
         // 读源文件
         BufferedInputStream bufferedReader = new BufferedInputStream(new FileInputStream(Context.taskInfo.getSourceFile()), bufferSize);
         int b;
-        byte[] buffer = new byte[1024 * 10];
+        byte[] buffer = new byte[1024 * 100];
         int i = 0;
         int hash = 1;
         long finished = 0;

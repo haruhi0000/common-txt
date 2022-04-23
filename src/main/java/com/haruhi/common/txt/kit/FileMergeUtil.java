@@ -33,14 +33,14 @@ public class FileMergeUtil extends Thread {
         // 结果文件输出流
         long finished = 0;
         BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(Context.taskInfo.getTargetFile()));
-        int bufferSize = 102400;
+        int bufferSize = 102400 * 2;
         Set<ByteWrapper> hashSet = new HashSet<>(Context.MAX_LINE_COUNT, 1);
         for (File file : tempDir) {
             System.out.println(file.getName() + "start>>>>>");
             // 读源文件
             BufferedInputStream bufferedReader = new BufferedInputStream(new FileInputStream(file), bufferSize);
             int b;
-            byte[] buffer = new byte[1024 * 10];
+            byte[] buffer = new byte[1024 * 100];
             int i = 0;
 
             while (true) {
