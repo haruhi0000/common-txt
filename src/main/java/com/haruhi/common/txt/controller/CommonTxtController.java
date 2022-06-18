@@ -129,7 +129,7 @@ public class CommonTxtController implements Initializable {
 
     public void onAboutLinkClick(MouseEvent mouseEvent) {
         try {
-            Desktop.getDesktop().browse(new URI("https://github.com/cqqno1/common-txt"));
+            Desktop.getDesktop().browse(new URI("https://github.com/haruhi0000/common-txt"));
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
