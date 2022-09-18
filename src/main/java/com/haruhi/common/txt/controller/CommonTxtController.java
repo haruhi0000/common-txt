@@ -20,6 +20,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 
 /**
  * @author haruhi0000
@@ -52,12 +53,15 @@ public class CommonTxtController implements Initializable {
     protected void onOpenFileButtonClick() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
-
+        fileChooser.setInitialDirectory(Context.initSourceFileDir);
         File file = fileChooser.showOpenDialog(CommonTxtApplication.mainStage);
         if (file != null) {
             sourceFilePathLabel.setText(file.getAbsolutePath());
             tempDirectoryLabel.setText(file.getParent() + File.separator + "temp");
             targetFilePathLabel.setText(file.getParent() + File.separator + file.getName() + ".unique.txt");
+            Context.initSourceFileDir = file.getParentFile();
+            // 初始目录写入注册表
+            Preferences.userRoot().node(Context.appName).put("initSourceFileDir", Context.initSourceFileDir.getAbsolutePath());
         }
         checkInputValue();
     }
