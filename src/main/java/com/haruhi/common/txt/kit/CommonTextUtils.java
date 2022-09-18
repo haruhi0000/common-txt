@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- * @author cppno1
+ * @author haruhi0000
  */
 public class CommonTextUtils {
 

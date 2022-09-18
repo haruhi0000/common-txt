@@ -22,7 +22,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
 /**
- * @author cppno1
+ * @author haruhi0000
  */
 public class CommonTxtController implements Initializable {
     @FXML

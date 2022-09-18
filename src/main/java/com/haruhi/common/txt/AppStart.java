@@ -1,7 +1,7 @@
 package com.haruhi.common.txt;
 
 /**
- * @author cppno1
+ * @author haruhi0000
  */
 public class AppStart {
     public static void main(String[] args) {

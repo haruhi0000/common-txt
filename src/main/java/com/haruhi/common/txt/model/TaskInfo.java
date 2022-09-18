@@ -4,7 +4,7 @@ import java.io.File;
 import java.nio.charset.Charset;
 
 /**
- * @author cppno1
+ * @author haruhi0000
  */
 public class TaskInfo {
     private File sourceFile;

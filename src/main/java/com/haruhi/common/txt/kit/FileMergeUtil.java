@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author cppno1
+ * @author haruhi0000
  */
 public class FileMergeUtil extends Thread {
 

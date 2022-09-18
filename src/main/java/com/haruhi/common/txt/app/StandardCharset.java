@@ -2,7 +2,7 @@ package com.haruhi.common.txt.app;
 
 
 /**
- * @author cppno1
+ * @author haruhi0000
  */
 public class StandardCharset {
     public static final String[] ALL_CHARSET = new String[]{

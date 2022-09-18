@@ -6,7 +6,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.*;
 
 /**
- * @author cppno1
+ * @author haruhi0000
  */
 public class FileSplitUtil extends Thread {
 

@@ -3,7 +3,7 @@ package com.haruhi.common.txt.model;
 import java.util.Arrays;
 
 /**
- * @author cppno1
+ * @author haruhi0000
  */
 public final class ByteWrapper {
     private byte[] bytes;

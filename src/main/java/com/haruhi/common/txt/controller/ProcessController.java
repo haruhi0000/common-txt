@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * @author cppno1
+ * @author haruhi0000
  */
 public class ProcessController implements Initializable {
     @FXML

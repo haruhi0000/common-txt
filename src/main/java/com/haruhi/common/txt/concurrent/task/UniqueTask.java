@@ -15,7 +15,7 @@ import java.io.IOException;
 
 
 /**
- * @author cppno1
+ * @author haruhi0000
  */
 public class UniqueTask extends Task<String> {
 

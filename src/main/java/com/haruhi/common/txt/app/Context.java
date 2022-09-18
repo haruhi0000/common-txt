@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- * @author cppno1
+ * @author haruhi0000
  */
 public class Context {
     public static final TaskInfo taskInfo = new TaskInfo();

@@ -12,7 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import java.io.IOException;
 
 /**
- * @author cppno1
+ * @author haruhi0000
  */
 public class CommonTxtApplication extends Application {
 
